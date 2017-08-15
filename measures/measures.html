@@ -1,0 +1,51 @@
+<html>
+<head>
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+var dpi=72;
+
+function updateDpi() {
+  dpi = Math.sqrt(screen.width*screen.width + screen.height*screen.height) / $('#screensize_field').val();
+  $('#dpi_field').val(dpi);
+}
+
+function updateBox() {
+  updateDpi();
+  $('#box').css("width",$('#width_field').val()*dpi);
+  $('#box').css("height",$('#height_field').val()*dpi);
+}
+
+$(document).ready(function() {
+  updateDpi();
+  $('#width_field').val(3);
+  $('#height_field').val(3);
+  updateBox();
+  $('#name_button').click(updateBox);
+});
+</script>
+<style>
+body {
+  margin: 0px;
+}
+
+#box {
+  border: 1px solid grey;
+  background: wheat;
+  padding: 1px;
+  margin: 10px;
+}
+</style>
+</head>
+<body>
+<div id="box">
+<div id="parameters">
+<p>DPI: <input type="text" id="dpi_field" name="dpi"></input>
+<p>Screen Size (inches): <input type="text" id="screensize_field" name="screensize" value="13.3"></input>
+<p>Width (inches): <input type="text" id="width_field" name="width" value="5"></input>
+<p>Height (inches): <input type="text" id="height_field" name="height" value="5"></input>
+<p><button id="name_button" value="Update" onclick="updateBox">Update</input>
+</div>
+</div>
+</body>
+</html>
